@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.persistence.BottomNavigationViewHelper;
 import com.example.android.persistence.R;
 import com.example.android.persistence.adapter.ViewPagerAdapter;
 import com.example.android.persistence.fragment.NewsListFragment;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // If BottomNavigationView has more than 3 items, using reflection to disable shift mode
-        //BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
     }
 
     private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -108,10 +109,10 @@ public class MainActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.bottom_navigation_green:
-                    viewPager.setCurrentItem(1);
+                    //viewPager.setCurrentItem(1);
                     return true;
                 case R.id.bottom_navigation_yellow:
-                    viewPager.setCurrentItem(2);
+                    //viewPager.setCurrentItem(2);
                     return true;
 
             }

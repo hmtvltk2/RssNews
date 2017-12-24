@@ -45,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
         RssItem rssItem =rssItems.get(position);
         holder.textViewTitle.setText(rssItem.getTitle());
-        holder.textViewDetail.setText(rssItem.getSummarize());
+        holder.textViewDetail.setText(rssItem.getDescription());
         ImageLoader.loadAll(context, rssItem.getImageLink(), holder.imageViewNews);
         final String url = rssItems.get(position).getLink();
 
