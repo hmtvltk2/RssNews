@@ -3,8 +3,6 @@ package com.example.android.persistence.RssFeed;
 import android.util.Log;
 import android.util.Xml;
 
-import com.eajy.materialdesigndemo.summarize.Spider;
-
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
@@ -109,14 +107,6 @@ public class RssFeedProvider {
                         name = parser.getName();
                         Log.i("End tag", name);
                         if (name.equalsIgnoreCase(ITEM) && item != null) {
-                            Log.i("Added", item.toString());
-                            Spider spider =new Spider();
-                            List<String> results = spider.search(item.getLink());
-                            String summarize = "";
-                            for (String line: results) {
-                                summarize = summarize + line + "\n";
-                            }
-                            item.setSummarize(summarize);
                             list.add(item);
                         } else if (name.equalsIgnoreCase(CHANNEL)) {
                             done = true;

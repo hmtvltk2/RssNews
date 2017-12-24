@@ -3,14 +3,11 @@ package com.example.android.persistence.RssFeed;
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
-import com.eajy.materialdesigndemo.RssApplication;
+import com.example.android.persistence.RssApplication;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RssDownloadService extends IntentService {
