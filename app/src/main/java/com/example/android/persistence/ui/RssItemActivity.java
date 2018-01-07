@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +16,7 @@ import android.webkit.WebViewClient;
 
 import com.example.android.persistence.BasicApp;
 import com.example.android.persistence.R;
+import com.example.android.persistence.Utils;
 import com.example.android.persistence.databinding.ActivityNewsItemBinding;
 import com.example.android.persistence.db.entity.RssItemEntity;
 import com.example.android.persistence.viewmodel.RssItemViewModel;
@@ -28,8 +27,10 @@ public class RssItemActivity extends AppCompatActivity {
     private MenuItem mMenuBookmark;
     private RssItemEntity rssItem;
     private int bookmark;
-    private ShareActionProvider mShareActionProvider;
     private ActivityNewsItemBinding mBinding;
+
+    public RssItemActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +88,8 @@ public class RssItemActivity extends AppCompatActivity {
             if(rssItemEntity!= null){
                 rssItem = rssItemEntity;
                 bookmark = rssItemEntity.getBookmark();
-                if(mMenuBookmark == null) return;
 
-                if(bookmark == 1){
-                    mMenuBookmark.setIcon(R.drawable.ic_bookmark_black_24dp);
-                }
-                else {
-                    mMenuBookmark.setIcon(R.drawable.ic_bookmark_border_black_24dp);
-                }
+
             }
         });
     }
@@ -108,9 +103,12 @@ public class RssItemActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        mMenuBookmark = menu.findItem(R.id.action_menu_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(mMenuBookmark);
-
+        mMenuBookmark = menu.findItem(R.id.action_menu_bookmark);
+        MenuItem item = menu.findItem(R.id.action_menu_share);
+        Utils.tintMenuIcon(getApplicationContext(), item, android.R.color.white);
+        if(bookmark == 1){
+            Utils.tintMenuIcon(getApplicationContext(), mMenuBookmark, R.color.colorAccent);
+        }
         return true;
     }
 
@@ -120,15 +118,17 @@ public class RssItemActivity extends AppCompatActivity {
             case R.id.action_menu_share:
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, mUrl);
-                mShareActionProvider.setShareIntent(intent);
+                intent.putExtra(Intent.EXTRA_TEXT, rssItem.getLink());
+                startActivity(Intent.createChooser(intent, "Choose sharing method"));
                 break;
             case R.id.action_menu_bookmark:
                 if(bookmark == 1){
                     rssItem.setBookmark(0);
+                    Utils.tintMenuIcon(getApplicationContext(), item, android.R.color.white);
                 }
                 else {
                     rssItem.setBookmark(1);
+                    Utils.tintMenuIcon(getApplicationContext(), item, R.color.colorAccent);
                 }
                 ((BasicApp)getApplication()).getRepository().updateRssItem(rssItem);
                 break;

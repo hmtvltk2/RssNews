@@ -5,11 +5,11 @@
         android:id="@+id/action_menu_share"
         android:title="@string/share"
         app:showAsAction="ifRoom"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
+        android:icon="@drawable/ic_share_black_24dp"/>
     <item
         android:id="@+id/action_menu_bookmark"
         android:title="@string/bookmark"
-        android:icon="@drawable/ic_bookmark_border_black_24dp"
+        android:icon="@drawable/ic_bookmark_white_24dp"
         app:showAsAction="ifRoom"/>
 
 </menu>

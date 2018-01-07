@@ -9,5 +9,6 @@
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
             app:layoutManager="LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/activity_background" />
 </layout>
