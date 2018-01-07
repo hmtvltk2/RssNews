@@ -1,12 +1,9 @@
-package com.example.android.persistence.activity;
+package com.example.android.persistence.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,12 +12,8 @@ import android.view.MenuItem;
 import com.example.android.persistence.BottomNavigationViewHelper;
 import com.example.android.persistence.R;
 import com.example.android.persistence.adapter.ViewPagerAdapter;
-import com.example.android.persistence.fragment.NewsListFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private DrawerLayout drawer;
-
     private BottomNavigationView mBottomNavigationView;
     private ViewPager viewPager;
 
@@ -36,17 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
     }
 
     private void initViewPager() {
         ViewPagerAdapter mFragmentAdapter = new ViewPagerAdapter (getSupportFragmentManager());
-        mFragmentAdapter.addFragment(new NewsListFragment());
+        mFragmentAdapter.addFragment(new RssListFragment());
+        mFragmentAdapter.addFragment(new SourceLibraryFragment());
+        mFragmentAdapter.addFragment(new TopicFragment());
+        mFragmentAdapter.addFragment(new RssBookmarkFragment());
 
         viewPager = findViewById(R.id.view_pager_main);
         viewPager.setAdapter(mFragmentAdapter);
@@ -91,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -109,23 +99,21 @@ public class MainActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.bottom_navigation_green:
-                    //viewPager.setCurrentItem(1);
+                    viewPager.setCurrentItem(1);
                     return true;
                 case R.id.bottom_navigation_yellow:
-                    //viewPager.setCurrentItem(2);
+                    viewPager.setCurrentItem(2);
                     return true;
-
+                case R.id.bottom_navigation_red:
+                    viewPager.setCurrentItem(3);
+                    return true;
             }
             return false;
         }
     };
 
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    public void viewTopicFragment(){
+        mBottomNavigationView.setSelectedItemId(R.id.bottom_navigation_yellow);
     }
+
 }

@@ -3,6 +3,7 @@ package com.example.android.persistence.db.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.example.android.persistence.model.RssItem;
 import java.util.Date;
@@ -10,20 +11,19 @@ import java.util.Date;
 @Entity(tableName = "rss_item")
 public class RssItemEntity implements RssItem {
     @PrimaryKey
-    private int id;
+    @NonNull
+    private String id;
+    private String link;
     private String title;
     private String description;
     private String imageLink;
-    private String rssSource;
+    private int rssSourceId;
     private Date pubDate;
+    private int bookmark;
 
     @Override
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public String getLink() {
+        return this.link;
     }
 
     @Override
@@ -50,8 +50,8 @@ public class RssItemEntity implements RssItem {
     }
 
     @Override
-    public String getRssSource() {
-        return rssSource;
+    public int getRssSourceId() {
+        return rssSourceId;
     }
 
     @Override
@@ -59,25 +59,52 @@ public class RssItemEntity implements RssItem {
         return pubDate;
     }
 
-
-    public RssItemEntity() {
+    @Override
+    public int getBookmark() {
+        return bookmark;
     }
 
-    public RssItemEntity(int id, String title, String description, String imageLink, String rssSource, Date pubDate) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
+    public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
-        this.rssSource = rssSource;
+    }
+
+    public void setRssSourceId(int rssSourceId) {
+        this.rssSourceId = rssSourceId;
+    }
+
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 
-    public RssItemEntity(RssItem rssItem) {
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public void setBookmark(int bookmark) {
+        this.bookmark = bookmark;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
+
+    public RssItemEntity() {
+        id = "";
+    }
+
+    public RssItemEntity(RssItem rssItem){
         this.id = rssItem.getId();
-        this.title = rssItem.getTitle();
-        this.description = rssItem.getDescription();
-        this.imageLink = rssItem.getImageLink();
-        this.rssSource = rssItem.getRssSource();
+        this.link = rssItem.getLink();
         this.pubDate = rssItem.getPubDate();
+        this.imageLink = rssItem.getImageLink();
+        this.bookmark = rssItem.getBookmark();
+        this.description = rssItem.getDescription();
+        this.title = rssItem.getTitle();
+        this.rssSourceId = rssItem.getRssSourceId();
     }
 }

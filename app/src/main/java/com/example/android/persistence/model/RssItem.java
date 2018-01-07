@@ -3,11 +3,13 @@ package com.example.android.persistence.model;
 import java.util.Date;
 
 public interface RssItem {
-    int getId();
+    String getId();
+    String getLink();
     String getTitle();
     String getDescription();
     String getImageLink();
-    String getRssSource();
+    int getRssSourceId();
     Date getPubDate();
+    int getBookmark();
 
 }
