@@ -3,20 +3,20 @@
     <item
         android:id="@+id/bottom_navigation_blue"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Blue" />
+        android:title="Tin mới" />
 
     <item
         android:id="@+id/bottom_navigation_green"
         android:icon="@drawable/ic_photo_black_24dp"
-        android:title="Green" />
+        android:title="Thư viên" />
 
     <item
         android:id="@+id/bottom_navigation_yellow"
         android:icon="@drawable/ic_music_note_black_24dp"
-        android:title="Yellow" />
+        android:title="Chủ đề" />
 
     <item
         android:id="@+id/bottom_navigation_red"
         android:icon="@drawable/ic_movie_black_24dp"
-        android:title="Red" />
+        android:title="Đọc sau" />
 </menu>

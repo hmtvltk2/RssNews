@@ -2,17 +2,23 @@ package com.example.android.persistence.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.android.persistence.BasicApp;
 import com.example.android.persistence.R;
+import com.example.android.persistence.databinding.ActivityNewsItemBinding;
 import com.example.android.persistence.db.entity.RssItemEntity;
 import com.example.android.persistence.viewmodel.RssItemViewModel;
 
@@ -23,28 +29,57 @@ public class RssItemActivity extends AppCompatActivity {
     private RssItemEntity rssItem;
     private int bookmark;
     private ShareActionProvider mShareActionProvider;
+    private ActivityNewsItemBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_item);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_item);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_news);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mBinding.toolbarNews);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         mUrl = getIntent().getStringExtra(KEY_RSS_LINK);
-        WebView webView = findViewById(R.id.web_view);
-        webView.loadUrl(mUrl);
+  
+        initWebView();
+        mBinding.webView.loadUrl(mUrl);
 
         RssItemViewModel.Factory factory = new RssItemViewModel.Factory(getApplication(), mUrl);
 
         final RssItemViewModel model = ViewModelProviders.of(this, factory).get(RssItemViewModel.class);
         
         subscribeToModel(model);
+    }
+
+    private void initWebView() {
+        mBinding.webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                mBinding.progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                mBinding.webView.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mBinding.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                mBinding.progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void subscribeToModel(RssItemViewModel model) {

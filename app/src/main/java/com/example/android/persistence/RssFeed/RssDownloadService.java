@@ -50,7 +50,7 @@ public class RssDownloadService extends IntentService {
     private static class Patterns {
         static final Pattern SRC = Pattern.compile("\\s*(?i)src\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))");
         static final Pattern DATA_ORIGINAL = Pattern.compile("\\s*(?i)data-original\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))");
-        static final Pattern DESCRIPTION = Pattern.compile("\\s*(?i)br\\s*(([^\"]*)|'[^']*'|([^'\">\\s]+))");
+        static final Pattern DESCRIPTION = Pattern.compile("\\s*(?i)(br />|/br>)\\s*(([^\"]*)|'[^']*'|([^'\">\\s]+))");
     }
 
     private class RssFeedProvider extends AsyncTask<List<RssSourceEntity>, Void, List<RssItemEntity>> {
@@ -138,7 +138,7 @@ public class RssDownloadService extends IntentService {
 
                                         Matcher matcherDescription = Patterns.DESCRIPTION.matcher(nextText);
                                         if (matcherDescription.find()) {
-                                            String description = matcherDescription.group(1).replaceAll("]]>", "");
+                                            String description = matcherDescription.group(2);
                                             Log.i("Description", description);
                                             item.setDescription(description);
                                         }

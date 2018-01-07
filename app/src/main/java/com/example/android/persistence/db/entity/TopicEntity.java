@@ -14,7 +14,7 @@ public class TopicEntity implements Topic {
     @PrimaryKey
     private int id;
     private String name;
-    private String imageUrl;
+    private int imageResource;
 
 
     @Override
@@ -28,8 +28,8 @@ public class TopicEntity implements Topic {
     }
 
     @Override
-    public String getImageUrl() {
-        return imageUrl;
+    public int getImageResource() {
+        return imageResource;
     }
 
     public void setId(int id) {
@@ -40,8 +40,8 @@ public class TopicEntity implements Topic {
         this.name = name;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
     }
 
     public TopicEntity(){}
@@ -49,12 +49,12 @@ public class TopicEntity implements Topic {
     public TopicEntity(Topic topic){
         this.id = topic.getId();
         this.name = topic.getName();
-        this.imageUrl = topic.getImageUrl();
+        this.imageResource = topic.getImageResource();
     }
 
-    public TopicEntity(int id, String name, String imageUrl) {
+    public TopicEntity(int id, String name, int imageResource) {
         this.id = id;
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.imageResource = imageResource;
     }
 }

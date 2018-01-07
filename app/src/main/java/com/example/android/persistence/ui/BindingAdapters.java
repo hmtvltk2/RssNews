@@ -33,18 +33,23 @@ public class BindingAdapters {
     @BindingAdapter("android:src")
     public static void setImageUri(ImageView view, String imageUri) {
         Glide.with(view.getContext()).load(imageUri).crossFade().skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT).into(view);
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(view);
     }
 
     @BindingAdapter("android:background")
     public static void setBackground(View view, String imageUri){
         Glide.with(view.getContext()).load(imageUri).crossFade().skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<GlideDrawable>() {
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(new SimpleTarget<GlideDrawable>() {
             @Override
             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                 view.setBackground(resource);
             }
         });
+    }
+
+    @BindingAdapter("android:background")
+    public static void setBackground(View view, int resourceId){
+        view.setBackgroundResource(resourceId);
     }
 
 

@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/main_label"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|stateUnchanged">
@@ -24,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RssItemActivity"
-            />
+        <activity android:name=".ui.RssItemActivity" />
+        <activity android:name=".ui.TopicDetailActivity"/>
         <service android:name=".RssFeed.RssDownloadService"/>
     </application>
 

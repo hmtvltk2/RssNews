@@ -1,5 +1,6 @@
 package com.example.android.persistence.db;
 
+import com.example.android.persistence.R;
 import com.example.android.persistence.db.entity.RssSourceEntity;
 import com.example.android.persistence.db.entity.TopicEntity;
 
@@ -54,6 +55,13 @@ public class DataGenerator {
                 "http://static.24h.com.vn/images/m2014/images/logo-24h_bookmarks.png",
                 2,
                 1));
+        rssSources.add(new RssSourceEntity(
+                5,
+                "http://www.24h.com.vn/upload/rss/bongda.rss",
+                "24h",
+                "http://static.24h.com.vn/images/m2014/images/logo-24h_bookmarks.png",
+                7,
+                0));
 
         return rssSources;
     }
@@ -61,12 +69,13 @@ public class DataGenerator {
     public static List<TopicEntity> generateTopics(){
         List<TopicEntity> topics = new ArrayList<>();
 
-        topics.add(new TopicEntity(1, "Thế giới", "@drawable/earth_120x120"));
-        topics.add(new TopicEntity(2, "Thời sự", "@drawable/earth_120x120"));
-        topics.add(new TopicEntity(3, "Sức khỏe", "@drawable/earth_120x120"));
-        topics.add(new TopicEntity(4, "Gia đình", "@drawable/earth_120x120"));
-        topics.add(new TopicEntity(5, "Du lịch", "@drawable/earth_120x120"));
-        topics.add(new TopicEntity(6, "Kinh doanh", "@drawable/earth_120x120"));
+        topics.add(new TopicEntity(1, "Thế giới", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(2, "Thời sự", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(3, "Sức khỏe", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(4, "Gia đình", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(5, "Du lịch", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(6, "Kinh doanh", R.drawable.earth_120x120));
+        topics.add(new TopicEntity(7, "Thể thao", R.drawable.earth_120x120));
 
         return topics;
     }

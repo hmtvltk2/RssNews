@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar()!= null){
+            getSupportActionBar().setTitle(R.string.fragment_rss_list_label);
+        }
     }
 
     private void initViewPager() {
@@ -60,15 +63,27 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     mBottomNavigationView.setSelectedItemId(R.id.bottom_navigation_blue);
+                    if(getSupportActionBar()!= null){
+                        getSupportActionBar().setTitle(R.string.fragment_rss_list_label);
+                    }
                     break;
                 case 1:
                     mBottomNavigationView.setSelectedItemId(R.id.bottom_navigation_green);
+                    if(getSupportActionBar()!= null){
+                        getSupportActionBar().setTitle(R.string.rss_source_library_label);
+                    }
                     break;
                 case 2:
                     mBottomNavigationView.setSelectedItemId(R.id.bottom_navigation_yellow);
+                    if(getSupportActionBar()!= null){
+                        getSupportActionBar().setTitle(R.string.topic_label);
+                    }
                     break;
                 case 3:
                     mBottomNavigationView.setSelectedItemId(R.id.bottom_navigation_red);
+                    if(getSupportActionBar()!= null){
+                        getSupportActionBar().setTitle(R.string.read_later_label);
+                    }
                     break;
             }
         }

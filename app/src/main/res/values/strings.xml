@@ -76,7 +76,9 @@
     <string name="bookmark">Bookmark</string>
     <string name="remove_topic">Xóa chủ đề</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="main_label">Tin mới nhất</string>
+    <string name="fragment_rss_list_label">Tin mới nhất</string>
+    <string name="rss_source_library_label">Nguồn tin tức</string>
+    <string name="topic_label">Chủ đề</string>
+    <string name="read_later_label">Đọc sau</string>
 </resources>

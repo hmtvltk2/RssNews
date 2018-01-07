@@ -8,5 +8,5 @@ package com.example.android.persistence.model;
 public interface Topic {
     int getId();
     String getName();
-    String getImageUrl();
+    int getImageResource();
 }

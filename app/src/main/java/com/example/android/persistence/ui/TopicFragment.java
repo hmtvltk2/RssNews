@@ -21,7 +21,6 @@ import com.example.android.persistence.viewmodel.TopicListViewModel;
 
 public class TopicFragment extends Fragment {
     private static final String TAG = "TopicFragment";
-    public static final String KEY_TOPIC_ID = "TopicId";
     private FragmentTopicListBinding mBinding;
     private TopicAdapter adapter;
 
@@ -58,8 +57,8 @@ public class TopicFragment extends Fragment {
 
     private final TopicClickCallback mTopicClickCallback = topic -> {
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            Intent intent = new Intent(getContext(), TopicDetailFragment.class);
-            intent.putExtra(KEY_TOPIC_ID, topic.getId());
+            Intent intent = new Intent(getContext(), TopicDetailActivity.class);
+            intent.putExtra(TopicDetailActivity.KEY_TOPIC_ID, topic.getId());
             getContext().startActivity(intent);
         }
 

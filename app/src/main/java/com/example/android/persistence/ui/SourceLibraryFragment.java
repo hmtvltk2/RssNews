@@ -46,8 +46,6 @@ public class SourceLibraryFragment extends Fragment {
             if (rssSources != null){
                 mAdapter.setRssSourceList(rssSources);
             }
-
-            mBinding.executePendingBindings();
         });
     }
 }

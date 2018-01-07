@@ -61,8 +61,13 @@ public class SourceLibraryAdapter extends RecyclerView.Adapter<SourceLibraryAdap
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    RssSource oldItem = mRssSource.get(oldItemPosition);
+                    RssSource newItem = rssSources.get(newItemPosition);
                     return mRssSource.get(oldItemPosition).getId() == rssSources.get(newItemPosition).getId()
-                            && Objects.equals(mRssSource.get(oldItemPosition).getName(), rssSources.get(newItemPosition).getName());
+                            && Objects.equals(oldItem.getName(), newItem.getName())
+                            && Objects.equals(oldItem.getInLibrary(), newItem.getInLibrary())
+                            && Objects.equals(oldItem.getImageUrl(), newItem.getImageUrl())
+                            && Objects.equals(oldItem.getLink(), newItem.getLink());
 
                 }
             });
