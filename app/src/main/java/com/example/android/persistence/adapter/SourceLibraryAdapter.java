@@ -103,6 +103,8 @@ public class SourceLibraryAdapter extends RecyclerView.Adapter<SourceLibraryAdap
             }
             Log.d(TAG, "Position: " + position);
             holder.mSourceLibraryBinding.setRssSource(mRssSource.get(position));
+            basicApp.getRepository().loadTopic(mRssSource.get(position).getTopicId())
+                    .observeForever(holder.mSourceLibraryBinding::setTopic);
             holder.mSourceLibraryBinding.textViewOptions.setOnClickListener(view -> {
                 PopupMenu popup = new PopupMenu(context, view);
                 //inflating menu from xml resource

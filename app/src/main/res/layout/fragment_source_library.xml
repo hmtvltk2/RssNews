@@ -4,6 +4,9 @@
         <variable
             name="rssSource"
             type="com.example.android.persistence.model.RssSource"/>
+        <variable
+            name="topic"
+            type="com.example.android.persistence.model.Topic"/>
     </data>
 
     <LinearLayout
@@ -42,7 +45,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:layout_gravity="center"
-            android:text="@{rssSource.name}"
+            android:text="@{topic.name}"
             />
 
     </LinearLayout>
